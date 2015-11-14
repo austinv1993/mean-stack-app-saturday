@@ -33,7 +33,7 @@ function homeController($scope, friendService) {
         }
 
         else if (!$scope.age || /[^0-9]/.test($scope.age)) {
-            $scope.flash = "Please enter an age (needs to be number, dummy!)";
+            $scope.flash = "Please enter an age (needs to be a number, dummy!)";
         }
 
         else {
