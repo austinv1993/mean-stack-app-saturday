@@ -12,7 +12,6 @@ var express = require('express'),
 
 module.exports = function () {
 
-    // let's create an Express app
     var app = express();
 
 
@@ -21,7 +20,7 @@ module.exports = function () {
     // fixes cross-origin issues
     app.use(cors());
 
-    // creates and populates the req.body
+    // creates and populates the req.body object
     app.use(bodyParser.json());
     app.use(bodyParser.urlencoded(
         {
@@ -41,22 +40,20 @@ module.exports = function () {
 
     // MIDDLEWARE THAT RUNS ONLY IN DEVELOPMENT
 
-    // a logger so we can see what's going on
+    // a logger so we can see activity in the console
     if (process.env.NODE_ENV === 'development') {
         app.use(morgan('dev'));
     }
 
 
-    // HERE WE INCLUDE THE ROUTES
+    // HERE WE CONFIGURE THE ROUTES
     require('../features/friends/friend.server.routes')(app);
 
 
-    // THIS WILL BE THE CLIENT-SIDE, ANGULAR APP
+    // THIS WILL BE THE ROOT OF THE ANGULAR APP
     // the route is relative to the root of the project
-    // needs to come after setting the rendering engine
     app.use(express.static('./core/client'));
-    
 
-    // server.js is going to need this guy
+
     return app;
 };
