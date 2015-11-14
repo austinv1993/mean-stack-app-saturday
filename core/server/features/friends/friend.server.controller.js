@@ -1,14 +1,5 @@
 var Friend = require('./friend.server.model');
 
-exports.postFriend = function (req, res, next) {
-
-    var friend = new Friend(req.body);
-    friend.save(function (err) {
-        if (err) res.send(err);
-        else res.json(friend);
-    });
-};
-
 
 exports.getFriends = function (req, res, next) {
 
@@ -30,6 +21,17 @@ exports.getOneFriend = function (req, res, next) {
 };
 
 
+exports.postFriend = function (req, res, next) {
+
+    var friend = new Friend(req.body);
+    friend.save(function (err) {
+        if (err) res.send(err);
+        else res.json(friend);
+    });
+};
+
+
+
 exports.putFriend = function (req, res, next) {
 
     Friend.findById(req.params.id)
@@ -37,6 +39,7 @@ exports.putFriend = function (req, res, next) {
             if (err) res.status(500).send(err);
             else {
                 friend.name = req.body.name;
+                friend.age = req.body.age;
                 friend.save();
                 res.json(friend);
             }

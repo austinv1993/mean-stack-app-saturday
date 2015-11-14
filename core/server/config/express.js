@@ -55,7 +55,8 @@ module.exports = function () {
     // the route is relative to the root of the project
     // needs to come after setting the rendering engine
     app.use(express.static('./core/client'));
+    
 
-
+    // server.js is going to need this guy
     return app;
 };
